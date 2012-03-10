@@ -1,0 +1,24 @@
+package Foo2;
+use Moose;
+use namespace::autoclean;
+
+use Catalyst::Runtime 5.80;
+
+use Catalyst;
+
+extends 'Catalyst';
+
+our $VERSION = '0.01';
+
+__PACKAGE__->config(
+   name => 'Foo',
+   'Catalyst::ActionRole::TxnDo' => { model => 'DB' },
+   disable_component_resolution_regex_fallback => 1,
+   'Model::DB' => {
+      connect_info => { dsn => 'dbi:SQLite::memory:' }
+   },
+);
+
+__PACKAGE__->setup();
+
+1;
