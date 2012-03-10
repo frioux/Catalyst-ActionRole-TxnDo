@@ -18,7 +18,6 @@ around execute => sub {
    my ($orig, $self, $controller, $c, @args) = @_;
 
    $c->model($self->_get_model($controller, $c))
-      ->schema
       ->txn_do(sub {
          $self->$orig($controller, $c, @args)
       })
